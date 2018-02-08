@@ -31,7 +31,7 @@ infoscoutexercise1.py for
 compare the focus brand to all other brands, and every brand should not return 'walmart')
 def retailer_affinity(focus_brand):
 
-### Instructions how to run infoscoutexercise1.py 
+Instructions how to run infoscoutexercise1.py 
 In terminal type python infoscoutexercise1.py 
 Then follow the prompts and answer will appear in terminal
 
@@ -41,7 +41,7 @@ infoscoutexercise2.py for
 dataset), allowing for a dynamic optional set of inputs:
 def count_hhs(brand=None, retailer=None, start_date=None, end_date=None):
 
-### Instructions how to run infoscoutexercise2.py 
+Instructions how to run infoscoutexercise2.py 
 In terminal type python infoscoutexercise2.py 
 Then follow the many prompts and the answer will appear in terminal
 
@@ -51,11 +51,11 @@ infoscoutexercise3.py
 3) Identify brand with top buying rate ($ spent / HH)
 def top_buying_brand():
 
-### Instructions how to run infoscoutexercise3.py 
+Instructions how to run infoscoutexercise3.py 
 In terminal type python infoscoutexercise3.py and the answer will appear in terminal
 
 ```
-###There are three Jupyter Notebooks for each of the three exercises
+#### There are three Jupyter Notebooks for each of the three exercises
 ```
 After setup, Create and run virtual environment on command line, and Install system dependancies 
 then in termial type jupyter notebook 
