@@ -4,7 +4,7 @@ from datetime import datetime
 
 transactions = pd.read_csv("https://s3.amazonaws.com/isc-isc/trips_gdrive.csv")
 
-def count_hhs(brand, retailer, start_date, end_date, transactions):
+def count_hhs(brand, retailer, start_date, end_date):
 
     query = 1
 
@@ -13,23 +13,23 @@ def count_hhs(brand, retailer, start_date, end_date, transactions):
     transactions["Date"]
     
   
-    if(brand == None and retailer == None and start_date == None and end_date == None):
+    if(brand == "" and retailer == "" and start_date == "" and end_date == ""):
         return transactions
 
 
-    if (brand != None):
+    if (brand != ""):
         query = 1 and (transactions["Parent Brand"] == brand)
     
-    if (retailer != None):
+    if (retailer != ""):
         query =  query & (transactions["Retailer"] == retailer) 
 
 
-    if (start_date!= None):
+    if (start_date!= ""):
         start_date = datetime.strptime(start_date, '%Y-%m-%d')
         query = query & (transactions['Date'] > start_date) 
         
     
-    if (end_date!= None):
+    if (end_date!= ""):
         end_date = datetime.strptime(end_date, '%Y-%m-%d')
         query = query & (transactions['Date'] < end_date)
     
@@ -40,42 +40,57 @@ def count_hhs(brand, retailer, start_date, end_date, transactions):
     count_hh_= len(unique)
     return count_hh_
 
+def is_valid_date(str_date):
+    if(str_date == ""):
+        return True
+    try:
+        datetime.strptime(str_date, '%Y-%m-%d')
+        return True
+    except:
+        return False
 
-print count_hhs("5 Hour Energy","Walmart", None, "2017-12-12", transactions)
-# def menu(transactions):
-#     while True:
-        
-#         unique_brands = transactions["Parent Brand"].unique()
-#         print "\n"
-#         print "\n".join(unique_brands)
-#         print None
-#         print ( "q to quit the program.\n")
+def menu():
+    unique_brands = transactions["Parent Brand"].unique()
+    brand_list = "\n".join(unique_brands)
 
-#         brand = raw_input("\nPlease pick one of the brands from the menu options: Rockstar, Monster, 5 Hour Energy, Red Bull, or q.\n")
-
-#         unique_retailers = transactions["Retailer"].unique()
-
-#         print "\n"
-#         print "\n".join(unique_retailers)
-#         print None
-#         print ( "q to quit the program.\n")
-
-#         retailer = raw_input("\nPlease pick one of the Retailers from the menu options: Walmart, Walgreens, Kroger, CVS, Publix, Costco, Target, Safeway, None, or q.\n")
+    brand = raw_input("\nPlease pick one of the brands from the options below or press enter to skip.\n" + brand_list + "\n").strip()
 
 
-#         if brand in unique_brands or None and retailer in unique_retailers or None:
-#             print "Your answer is: "
-#             print count_hhs(brand, retailer, "2014-6-1", "2017-4-1", transactions)
-#             print "\n"
-#             break
-#         elif brand == "q":
-#             break       
-#         else :
-#             print "Please re run this program and re input one of the selections again.\n"
+    if brand != "" and brand not in unique_brands:
+        brand = ""
+        print "Warning invalid brand.  Ignoring it."
+
+    unique_retailers = transactions["Retailer"].unique()
+    retailer_list = "\n".join(unique_retailers)        
+    retailer = raw_input("\nPlease pick one of the retailers from the options below or press enter to skip.\n" + retailer_list + "\n").strip()
+
+    if retailer != "" and retailer not in unique_retailers:
+        retailer = ""
+        print "Warning invalid retailer.  Ignoring it."
+
+    dates = transactions["Date"]
+
+    start_date = raw_input("\nPlease input either an start date in this format year-month-day ex. 2014-6-1 or press enter to skip.\n").strip()
+    
+    if(is_valid_date(start_date) == False):
+        start_date = ""
+        print "Invalid date.  Ignoring."
+
+    end_date = raw_input("\nPlease input either an end date in this format year-month-day ex. 2018-2-7 or press enter to skip.\n").strip()
+
+    if(is_valid_date(end_date) == False):
+        end_date = ""
+        print "Invalid date.  Ignoring."
+
+    print "\nCalculating your answer..."
+    print count_hhs(brand, retailer, start_date, end_date)
+    print "\n"
+
+    
             
 
 
-# menu(transactions)
+menu()
 
 
 
