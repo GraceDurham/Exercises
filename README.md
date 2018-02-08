@@ -55,7 +55,7 @@ Instructions how to run infoscoutexercise3.py
 In terminal type python infoscoutexercise3.py and the answer will appear in terminal
 
 ```
-#### There are three Jupyter Notebooks for each of the three exercises
+#### There is one Jupyter Notebook for each of the three exercises
 ```
 After setup, Create and run virtual environment on command line, and Install system dependancies 
 then in termial type jupyter notebook 
